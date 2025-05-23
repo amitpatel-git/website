@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Learning Hub | Master Robotics & AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/lissbs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Global Styles ===== */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Header & Navigation ===== */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a i {
+            margin-right: 5px;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* ===== Robotics Overview Section ===== */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 1rem auto 0;
+        }
+
+        .robotics-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .overview-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .overview-card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--secondary);
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ===== Robotics Fields Section ===== */
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .field-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .field-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .field-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent), #2980b9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .field-card:hover .field-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .field-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .field-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ===== Career Guide Section ===== */
+        .career-steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-number {
+            min-width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-content {
+            padding: 20px;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            color: #666;
+        }
+
+        /* ===== Resources Section ===== */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .resource-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .resource-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .resource-body {
+            padding: 20px;
+        }
+
+        .resource-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .resource-body p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .resource-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column p {
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links a i {
+            margin-right: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Header & Navigation ===== -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <span>Robotics Hub</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#overview"><i class="fas fa-book"></i> Overview</a></li>
+                    <li><a href="#fields"><i class="fas fa-cogs"></i> Fields</a></li>
+                    <li><a href="#career"><i class="fas fa-user-graduate"></i> Career Guide</a></li>
+                    <li><a href="#resources"><i class="fas fa-tools"></i> Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== Hero Section ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Master the Future of Robotics</h1>
+            <p>Comprehensive learning resources, career guidance, and the latest advancements in robotics and AI for aspiring engineers and researchers.</p>
+            <a href="#overview" class="btn">Explore Robotics</a>
+            <a href="#career" class="btn btn-outline">Career Guide</a>
+        </div>
+    </section>
+
+    <!-- ===== Robotics Overview Section ===== -->
+    <section class="section" id="overview">
+        <div class="container">
+            <div class="section-title">
+                <h2>What is Robotics?</h2>
+                <p>Robotics is an interdisciplinary field that combines computer science, engineering, and technology to design, construct, and operate robots.</p>
+            </div>
+            <div class="robotics-overview">
+                <div class="overview-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Robotics Basics">
+                    </div>
+                    <div class="card-content">
+                        <h3>Introduction to Robotics</h3>
+                        <p>Robotics involves the design, construction, operation, and use of robots to perform tasks traditionally done by humans. Robots are used in manufacturing, healthcare, space exploration, and more.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Robotics Components">
+                    </div>
+                    <div class="card-content">
+                        <h3>Key Components</h3>
+                        <p>Robots consist of mechanical parts, sensors, actuators, and control systems. AI and machine learning enable robots to make decisions and adapt to environments.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1677442135136-760c813a743d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Robotics Applications">
+                    </div>
+                    <div class="card-content">
+                        <h3>Applications</h3>
+                        <p>From industrial automation to surgical robots and self-driving cars, robotics is transforming industries and improving quality of life worldwide.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Robotics Fields Section ===== -->
+    <section class="section" id="fields" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Major Fields in Robotics</h2>
+                <p>Explore the diverse specializations within robotics engineering and research.</p>
+            </div>
+            <div class="fields-grid">
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Industrial Robotics</h3>
+                    <p>Design and implementation of robots for manufacturing, assembly, and production lines.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-medkit"></i>
+                    </div>
+                    <h3>Medical Robotics</h3>
+                    <p>Development of surgical robots, prosthetics, and rehabilitation devices.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Autonomous Vehicles</h3>
+                    <p>Self-driving cars, drones, and other autonomous transportation systems.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Implementing artificial intelligence to enable robot decision-making.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-space-shuttle"></i>
+                    </div>
+                    <h3>Space Robotics</h3>
+                    <p>Robots for space exploration, satellite servicing, and planetary rovers.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Service Robotics</h3>
+                    <p>Domestic robots, cleaning robots, and personal assistant robots.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Career Guide Section ===== -->
+    <section class="section" id="career">
+        <div class="container">
+            <div class="section-title">
+                <h2>How to Build a Career in Robotics</h2>
+                <p>A step-by-step guide to becoming a robotics engineer or researcher.</p>
+            </div>
+            <div class="career-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Build Strong Fundamentals</h3>
+                        <p>Master mathematics, physics, and programming (Python, C++). Study mechanical and electrical engineering concepts.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Pursue Relevant Education</h3>
+                        <p>Consider degrees in Robotics Engineering, Mechatronics, Computer Science, or Electrical/Mechanical Engineering with robotics specialization.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Develop Technical Skills</h3>
+                        <p>Learn CAD tools (SolidWorks), robotics frameworks (ROS), control systems, and AI/ML algorithms.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Work on Practical Projects</h3>
+                        <p>Build robots, participate in competitions (FIRST Robotics, RoboCup), and contribute to open-source robotics projects.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Gain Industry Experience</h3>
+                        <p>Intern at robotics companies, join research labs, or work on industrial automation projects.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Specialize & Advance</h3>
+                        <p>Choose a niche (computer vision, motion planning, etc.) and consider graduate studies for research roles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Resources Section ===== -->
+    <section class="section" id="resources" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Learning Resources</h2>
+                <p>Recommended books, courses, and platforms to accelerate your robotics journey.</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Online Courses">
+                    </div>
+                    <div class="resource-body">
+                        <h3>Online Courses</h3>
+                        <p>Coursera, edX, and Udacity offer specialized robotics programs from top universities.</p>
+                        <a href="#" class="resource-link">Explore Courses</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Books">
+                    </div>
+                    <div class="resource-body">
+                        <h3>Essential Books</h3>
+                        <p>"Robotics: Modelling, Planning and Control" by Siciliano and "Probabilistic Robotics" by Thrun.</p>
+                        <a href="#" class="resource-link">View Books</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Development Kits">
+                    </div>
+                    <div class="resource-body">
+                        <h3>Robotics Kits</h3>
+                        <p>Arduino, Raspberry Pi, LEGO Mindstorms, and TurtleBot for hands-on learning.</p>
+                        <a href="#" class="resource-link">Shop Kits</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Robotics Hub</h3>
+                    <p>Your comprehensive guide to robotics education, career development, and the latest technological advancements.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#overview"><i class="fas fa-chevron-right"></i> Robotics Overview</a></li>
+                        <li><a href="#fields"><i class="fas fa-chevron-right"></i> Fields</a></li>
+                        <li><a href="#career"><i class="fas fa-chevron-right"></i> Career Guide</a></li>
+                        <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@roboticshub.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Park, Robotics City</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Robotics Learning Hub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript for Interactive Elements ===== -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.field-card, .overview-card, .step, .resource-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+
+            // Initialize elements with hidden state
+            const animatedElements = document.querySelectorAll('.field-card, .overview-card, .step, .resource-card');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+
+            // Run on load and scroll
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>ss

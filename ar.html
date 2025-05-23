@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTL AI & Robotics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #3f51b5;
+            --secondary: #303f9f;
+            --accent: #00bcd4;
+            --dark: #212121;
+            --light: #f5f5f5;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --robotics: #9c27b0;
+            --ai: #2196f3;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        /* Header Styles */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .main-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .main-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Navigation Styles */
+        .main-nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Navigation Grid */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .nav-card:hover .card-header img {
+            transform: scale(1.1);
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ai-card .card-icon {
+            color: var(--ai);
+        }
+
+        .robotics-card .card-icon {
+            color: var(--robotics);
+        }
+
+        .nav-card:hover .card-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-body h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .card-body p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            padding: 0 25px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            box-shadow: 0 8px 20px rgba(22, 96, 136, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-ai {
+            background: linear-gradient(45deg, var(--ai), #1976d2);
+        }
+
+        .btn-ai:hover {
+            background: linear-gradient(45deg, #1976d2, var(--ai));
+        }
+
+        .btn-robotics {
+            background: linear-gradient(45deg, var(--robotics), #7b1fa2);
+        }
+
+        .btn-robotics:hover {
+            background: linear-gradient(45deg, #7b1fa2, var(--robotics));
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-beginner {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success);
+        }
+
+        .tag-intermediate {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: var(--warning);
+        }
+
+        .tag-advanced {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: var(--danger);
+        }
+
+        /* Knowledge Sections */
+        .knowledge-section {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .knowledge-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .knowledge-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-right: 20px;
+            color: white;
+        }
+
+        .ai-icon {
+            background: linear-gradient(45deg, var(--ai), #1976d2);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .robotics-icon {
+            background: linear-gradient(45deg, var(--robotics), #7b1fa2);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .knowledge-header h3 {
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .knowledge-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .knowledge-text {
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .knowledge-text h4 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .knowledge-text ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .knowledge-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        .knowledge-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .knowledge-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .knowledge-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Featured Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .resource-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .resource-content {
+            padding: 1.5rem;
+        }
+
+        .resource-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .resource-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .knowledge-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .knowledge-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem;
+            }
+            
+            .knowledge-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .knowledge-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .knowledge-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .nav-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .nav-card:nth-child(1) { animation-delay: 0.2s; }
+        .nav-card:nth-child(2) { animation-delay: 0.3s; }
+        .nav-card:nth-child(3) { animation-delay: 0.4s; }
+        .nav-card:nth-child(4) { animation-delay: 0.5s; }
+        .nav-card:nth-child(5) { animation-delay: 0.6s; }
+        .nav-card:nth-child(6) { animation-delay: 0.7s; }
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Robotics & AI Learning Hub</h1>
+            <p>Comprehensive resources for mastering Artificial Intelligence and Robotics. Perfect for students, educators, and enthusiasts at all skill levels.</p>
+            <a href="#navigation" class="btn btn-primary">Explore Learning Paths</a>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-robot"></i> PTL AI & Robotics
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="ai.html">AI Learning</a></li>
+                <li><a href="robotics.html">Robotics</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Navigation Cards Section -->
+    <section id="navigation" class="section">
+        <div class="section-header">
+            <h2>Learning Paths</h2>
+            <p>Choose your path to master Robotics and Artificial Intelligence. We offer structured learning for all skill levels.</p>
+        </div>
+
+        <div class="nav-grid">
+            <!-- AI Fundamentals -->
+            <div class="nav-card ai-card">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="AI Fundamentals">
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="card-body">
+                    <h3>AI Fundamentals</h3>
+                    <p>Learn the core concepts of Artificial Intelligence including machine learning, neural networks, and computer vision.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag tag-beginner">Beginner</span>
+                    <a href="#ai-section" class="btn btn-ai">Start Learning</a>
+                </div>
+            </div>
+
+            <!-- Robotics Basics -->
+            <div class="nav-card robotics-card">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Robotics Basics">
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="card-body">
+                    <h3>Robotics Basics</h3>
+                    <p>Master the fundamentals of robotics including mechanics, electronics, and basic programming.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag tag-beginner">Beginner</span>
+                    <a href="#robotics-section" class="btn btn-robotics">Get Started</a>
+                </div>
+            </div>
+
+            <!-- Machine Learning -->
+            <div class="nav-card ai-card">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Machine Learning">
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="card-body">
+                    <h3>Machine Learning</h3>
+                    <p>Dive into supervised and unsupervised learning algorithms with real-world applications.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag tag-intermediate">Intermediate</span>
+                    <a href="#ai-section" class="btn btn-ai">Explore ML</a>
+                </div>
+            </div>
+
+            <!-- Advanced Robotics -->
+            <div class="nav-card robotics-card">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Advanced Robotics">
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="card-body">
+                    <h3>Advanced Robotics</h3>
+                    <p>Explore ROS, autonomous navigation, and advanced robotic systems design.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag tag-advanced">Advanced</span>
+                    <a href="#robotics-section" class="btn btn-robotics">Master Robotics</a>
+                </div>
+            </div>
+
+            <!-- Computer Vision -->
+            <div class="nav-card ai-card">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Computer Vision">
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="card-body">
+                    <h3>Computer Vision</h3>
+                    <p>Learn image processing, object detection, and facial recognition techniques.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag tag-intermediate">Intermediate</span>
+                    <a href="#ai-section" class="btn btn-ai">View Content</a>
+                </div>
+            </div>
+
+            <!-- Robotics Projects -->
+            <div class="nav-card robotics-card">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Robotics Projects">
+                </div>
+                <div class="card-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="card-body">
+                    <h3>Robotics Projects</h3>
+                    <p>Hands-on projects with Arduino, Raspberry Pi, and other platforms to build real robots.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag tag-intermediate">Intermediate</span>
+                    <a href="#robotics-section" class="btn btn-robotics">View Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Knowledge Section -->
+    <section id="ai-section" class="section">
+        <div class="knowledge-section">
+            <div class="knowledge-header">
+                <div class="knowledge-icon ai-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Artificial Intelligence</h3>
+            </div>
+            
+            <div class="knowledge-content">
+                <div class="knowledge-text">
+                    <h4>What is Artificial Intelligence?</h4>
+                    <p>Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are programmed to think like humans and mimic their actions. AI systems are capable of performing tasks that typically require human intelligence such as visual perception, speech recognition, decision-making, and language translation.</p>
+                    
+                    <h4>Key Concepts in AI:</h4>
+                    <ul>
+                        <li><strong>Machine Learning:</strong> Algorithms that improve automatically through experience</li>
+                        <li><strong>Neural Networks:</strong> Computing systems inspired by biological neural networks</li>
+                        <li><strong>Natural Language Processing:</strong> Interaction between computers and human languages</li>
+                        <li><strong>Computer Vision:</strong> How computers gain understanding from digital images/videos</li>
+                        <li><strong>Robotics:</strong> Design and use of robots with AI capabilities</li>
+                    </ul>
+                    
+                    <h4>Applications of AI:</h4>
+                    <p>AI is transforming industries including healthcare (diagnosis, drug discovery), finance (fraud detection, algorithmic trading), transportation (self-driving cars), customer service (chatbots), and more. The potential applications are nearly limitless as AI systems become more sophisticated.</p>
+                    
+                    <a href="#" class="btn btn-ai">Explore AI Courses</a>
+                </div>
+                
+                <div class="knowledge-image">
+                    <img src="https://images.unsplash.com/photo-1677442135136-760c813a743e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="AI Applications">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Robotics Knowledge Section -->
+    <section id="robotics-section" class="section">
+        <div class="knowledge-section">
+            <div class="knowledge-header">
+                <div class="knowledge-icon robotics-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Robotics Engineering</h3>
+            </div>
+            
+            <div class="knowledge-content">
+                <div class="knowledge-text">
+                    <h4>What is Robotics?</h4>
+                    <p>Robotics is an interdisciplinary branch of engineering and science that includes mechanical engineering, electrical engineering, computer science, and others. Robotics deals with the design, construction, operation, and use of robots, as well as computer systems for their control, sensory feedback, and information processing.</p>
+                    
+                    <h4>Core Components of Robotics:</h4>
+                    <ul>
+                        <li><strong>Mechanical Design:</strong> Physical structure and mechanisms of robots</li>
+                        <li><strong>Electronics:</strong> Circuits, sensors, and power systems</li>
+                        <li><strong>Control Systems:</strong> How robots process information and execute actions</li>
+                        <li><strong>Programming:</strong> Software that controls robot behavior</li>
+                        <li><strong>Artificial Intelligence:</strong> Enabling robots to make autonomous decisions</li>
+                    </ul>
+                    
+                    <h4>Types of Robots:</h4>
+                    <p>Robots come in many forms including industrial robots (manufacturing), service robots (cleaning, delivery), medical robots (surgery), exploration robots (space, underwater), and educational robots (learning tools). Modern robotics increasingly incorporates AI to create more autonomous, adaptable systems.</p>
+                    
+                    <a href="#" class="btn btn-robotics">View Robotics Programs</a>
+                </div>
+                
+                <div class="knowledge-image">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Robotics Applications">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section">
+        <div class="section-header">
+            <h2>Featured Resources</h2>
+            <p>Hand-picked learning materials to accelerate your Robotics and AI journey.</p>
+        </div>
+        
+        <div class="resources-grid">
+            <div class="resource-card">
+                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Python for AI">
+                <div class="resource-content">
+                    <h4>Python for AI & Robotics</h4>
+                    <div class="resource-meta">
+                        <span><i class="far fa-clock"></i> 8-week course</span>
+                        <span><i class="fas fa-level-up-alt"></i> Beginner</span>
+                    </div>
+                    <p>Comprehensive guide to using Python for AI and robotics applications with practical examples.</p>
+                    <a href="#" class="btn btn-primary">Enroll Now</a>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="ROS Guide">
+                <div class="resource-content">
+                    <h4>ROS Mastery Guide</h4>
+                    <div class="resource-meta">
+                        <span><i class="far fa-clock"></i> 12-week course</span>
+                        <span><i class="fas fa-level-up-alt"></i> Advanced</span>
+                    </div>
+                    <p>Complete guide to Robot Operating System (ROS) for developing complex robotic applications.</p>
+                    <a href="#" class="btn btn-primary">Learn ROS</a>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Neural Networks">
+                <div class="resource-content">
+                    <h4>Neural Networks Explained</h4>
+                    <div class="resource-meta">
+                        <span><i class="far fa-clock"></i> 6-week course</span>
+                        <span><i class="fas fa-level-up-alt"></i> Intermediate</span>
+                    </div>
+                    <p>Deep dive into neural network architectures, training methods, and practical implementations.</p>
+                    <a href="#" class="btn btn-primary">Start Learning</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <h3>Robotics & AI Learning Hub</h3>
+            <p>Empowering the next generation of innovators and problem solvers.</p>
+            
+            <ul class="footer-links">
+                <li><a href="#ai-section">AI Learning</a></li>
+                <li><a href="#robotics-section">Robotics</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <div class="social-links">
+                <a href="https://www.facebook.com/amitpatel.patel.12914"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/amitpatel775659?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/amitpatel-git/website"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <p>&copy; 2025 Robotics & AI Learning Hub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

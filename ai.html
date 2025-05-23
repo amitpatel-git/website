@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Hub | Master Artificial Intelligence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Global Styles ===== */
+        :root {
+            --primary: #4a148c;
+            --secondary: #7b1fa2;
+            --accent: #e91e63;
+            --dark: #311b92;
+            --light: #f3e5f5;
+            --success: #00c853;
+            --warning: #ffab00;
+            --danger: #ff1744;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Header & Navigation ===== */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a i {
+            margin-right: 5px;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1677442135136-760c813a743d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background: #c2185b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* ===== AI Overview Section ===== */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 1rem auto 0;
+        }
+
+        .ai-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .overview-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .overview-card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--secondary);
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ===== AI Fields Section ===== */
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .field-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .field-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .field-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--accent), #c2185b);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .field-card:hover .field-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .field-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .field-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ===== Career Guide Section ===== */
+        .career-steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-number {
+            min-width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-content {
+            padding: 20px;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            color: #666;
+        }
+
+        /* ===== Resources Section ===== */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .resource-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .resource-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .resource-body {
+            padding: 20px;
+        }
+
+        .resource-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .resource-body p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .resource-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary);
+        }
+
+        /* ===== AI Applications Showcase ===== */
+        .applications-showcase {
+            background: linear-gradient(rgba(74, 20, 140, 0.9), rgba(74, 20, 140, 0.9)), 
+                        url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .application-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .application-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .application-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .application-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .application-card p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column p {
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links a i {
+            margin-right: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                width: 100%;
+                border-radius: 10px 10px 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Header & Navigation ===== -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>AI Learning Hub</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#overview"><i class="fas fa-book"></i> AI Overview</a></li>
+                    <li><a href="#fields"><i class="fas fa-cogs"></i> AI Fields</a></li>
+                    <li><a href="#career"><i class="fas fa-user-graduate"></i> Career Guide</a></li>
+                    <li><a href="#resources"><i class="fas fa-tools"></i> Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== Hero Section ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Master Artificial Intelligence</h1>
+            <p>Comprehensive learning resources, career guidance, and the latest advancements in AI for aspiring engineers, researchers, and innovators.</p>
+            <a href="#overview" class="btn">Explore AI</a>
+            <a href="#career" class="btn btn-outline">Career Path</a>
+        </div>
+    </section>
+
+    <!-- ===== AI Overview Section ===== -->
+    <section class="section" id="overview">
+        <div class="container">
+            <div class="section-title">
+                <h2>What is Artificial Intelligence?</h2>
+                <p>AI is the simulation of human intelligence processes by machines, especially computer systems.</p>
+            </div>
+            <div class="ai-overview">
+                <div class="overview-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1677442135136-760c813a743d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="AI Basics">
+                    </div>
+                    <div class="card-content">
+                        <h3>Introduction to AI</h3>
+                        <p>Artificial Intelligence refers to systems that mimic human intelligence to perform tasks and improve themselves based on collected information.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Machine Learning">
+                    </div>
+                    <div class="card-content">
+                        <h3>Machine Learning</h3>
+                        <p>ML is a subset of AI that enables systems to learn and improve from experience without being explicitly programmed.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c0b8e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Deep Learning">
+                    </div>
+                    <div class="card-content">
+                        <h3>Deep Learning</h3>
+                        <p>DL uses neural networks with many layers to analyze various factors with a structure similar to the human brain.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AI Fields Section ===== -->
+    <section class="section" id="fields" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Major Fields in AI</h2>
+                <p>Explore the diverse specializations within artificial intelligence.</p>
+            </div>
+            <div class="fields-grid">
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Computer Vision</h3>
+                    <p>Enabling computers to identify and process objects in images and videos like human vision.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Natural Language Processing</h3>
+                    <p>Helping computers understand, interpret and manipulate human language.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Predictive Analytics</h3>
+                    <p>Using data, statistical algorithms to identify future outcomes based on historical data.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Autonomous Systems</h3>
+                    <p>Self-driving vehicles, drones and other autonomous machines.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Healthcare AI</h3>
+                    <p>AI applications in diagnosis, treatment recommendations, and patient care.</p>
+                </div>
+                <div class="field-card">
+                    <div class="field-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Game AI</h3>
+                    <p>Creating intelligent behaviors in non-player characters and game environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AI Applications Showcase ===== -->
+    <section class="applications-showcase">
+        <div class="container">
+            <div class="section-title" style="color: white;">
+                <h2>AI Transforming Industries</h2>
+                <p>Artificial Intelligence is revolutionizing every sector of the economy</p>
+            </div>
+            <div class="applications-grid">
+                <div class="application-card">
+                    <i class="fas fa-medkit"></i>
+                    <h3>Healthcare</h3>
+                    <p>AI assists in diagnosis, drug discovery, personalized treatment plans, and robotic surgery.</p>
+                </div>
+                <div class="application-card">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Finance</h3>
+                    <p>Algorithmic trading, fraud detection, risk assessment, and personalized banking.</p>
+                </div>
+                <div class="application-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Retail</h3>
+                    <p>Personalized recommendations, inventory management, and cashier-less stores.</p>
+                </div>
+                <div class="application-card">
+                    <i class="fas fa-industry"></i>
+                    <h3>Manufacturing</h3>
+                    <p>Predictive maintenance, quality control, and supply chain optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Career Guide Section ===== -->
+    <section class="section" id="career">
+        <div class="container">
+            <div class="section-title">
+                <h2>How to Build a Career in AI</h2>
+                <p>A step-by-step guide to becoming an AI engineer or researcher.</p>
+            </div>
+            <div class="career-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Build Strong Fundamentals</h3>
+                        <p>Master mathematics (linear algebra, calculus, statistics), programming (Python, R), and computer science fundamentals.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Learn Core AI Concepts</h3>
+                        <p>Study machine learning algorithms, neural networks, NLP, computer vision, and reinforcement learning.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Develop Technical Skills</h3>
+                        <p>Gain proficiency with TensorFlow, PyTorch, scikit-learn, pandas, and data visualization tools.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Work on Practical Projects</h3>
+                        <p>Build AI models, participate in Kaggle competitions, contribute to open-source AI projects.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Gain Industry Experience</h3>
+                        <p>Intern at AI companies, work on research projects, or freelance to solve real-world problems.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Specialize & Advance</h3>
+                        <p>Choose a niche (computer vision, NLP, etc.) and consider graduate studies for research roles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Resources Section ===== -->
+    <section class="section" id="resources" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>AI Learning Resources</h2>
+                <p>Recommended books, courses, and platforms to accelerate your AI journey.</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Online Courses">
+                    </div>
+                    <div class="resource-body">
+                        <h3>Online Courses</h3>
+                        <p>Coursera, edX, and Udacity offer specialized AI programs from top universities like Stanford and MIT.</p>
+                        <a href="#" class="resource-link">Explore Courses</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Books">
+                    </div>
+                    <div class="resource-body">
+                        <h3>Essential Books</h3>
+                        <p>"Artificial Intelligence: A Modern Approach" by Russell & Norvig and "Deep Learning" by Goodfellow.</p>
+                        <a href="#" class="resource-link">View Books</a>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Development Tools">
+                    </div>
+                    <div class="resource-body">
+                        <h3>Development Tools</h3>
+                        <p>Jupyter Notebooks, Google Colab, TensorFlow, PyTorch, and various AI cloud platforms.</p>
+                        <a href="#" class="resource-link">Explore Tools</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AI Learning Hub</h3>
+                    <p>Your comprehensive guide to artificial intelligence education, career development, and the latest technological advancements.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#overview"><i class="fas fa-chevron-right"></i> AI Overview</a></li>
+                        <li><a href="#fields"><i class="fas fa-chevron-right"></i> AI Fields</a></li>
+                        <li><a href="#career"><i class="fas fa-chevron-right"></i> Career Guide</a></li>
+                        <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@aihub.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Park, AI City</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 AI Learning Hub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript for Interactive Elements ===== -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.field-card, .overview-card, .step, .resource-card, .application-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+
+            // Initialize elements with hidden state
+            const animatedElements = document.querySelectorAll('.field-card, .overview-card, .step, .resource-card, .application-card');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+
+            // Run on load and scroll
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
